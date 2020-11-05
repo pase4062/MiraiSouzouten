@@ -13,6 +13,7 @@ public class ActiveObjController : MonoBehaviour
     [SerializeField]
     private bool Actflag;   // ゲーム進行フラグ
     private bool goalflag;  // ゴール判定フラグ
+    private bool eatflag;   // 捕食フラグ
 
     [SerializeField]
     private GameObject NextObj;                     // 次に動かすオブジェクト
