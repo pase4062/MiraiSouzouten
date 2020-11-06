@@ -8,6 +8,10 @@ public class AppleController : MonoBehaviour
     private bool Downf;         // 落下フラグ
     private bool Eatf;          // 捕食可能フラグ
 
+    [SerializeField]
+    GameObject LeafObj;         // 落下する葉っぱオブジェクト
+
+
     private Rigidbody rb;       // 重力変数
     // Start is called before the first frame update
     void Start()
