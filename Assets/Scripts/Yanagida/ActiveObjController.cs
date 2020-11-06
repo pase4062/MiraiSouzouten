@@ -13,6 +13,7 @@ public class ActiveObjController : MonoBehaviour
     [SerializeField]
     private bool Actflag;   // ゲーム進行フラグ
     private bool goalflag;  // ゴール判定フラグ
+    private bool eatflag;   // 捕食フラグ
 
     [SerializeField]
     private GameObject NextObj;                     // 次に動かすオブジェクト
@@ -21,6 +22,8 @@ public class ActiveObjController : MonoBehaviour
     [SerializeField]
     GameObject apple;
     private AppleController appleController;     // 次に動かすオブジェクトスクリプト
+
+    private GoalObject goalObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,15 +69,10 @@ public class ActiveObjController : MonoBehaviour
         }
         else if(this.gameObject.tag == "Finish")
         {
-            if(goalflag)    // ゴール可能か
-            {
-                // 次のシーンへ飛ぶかステージクリア演出の表示
-                Debug.Log("くりあ！！");
-            }
-            else // ステージごとにゴール阻害するものが変わるため書き直しそう(ステージ1では蜘蛛が邪魔してくる)
-            {
+            goalObj = this.GetComponent<GoalObject>();
 
-            }
+            goalObj.GetActive();    // ゴールオブジェクト関数
+            
         }
         else
         {
