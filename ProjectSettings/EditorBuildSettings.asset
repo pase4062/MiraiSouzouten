@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ooba/OobaTitle.unity
+    guid: c4456d53fbb84d645b89f6e33c5f91a7
+  - enabled: 1
+    path: Assets/Scenes/ooba/OobaGame.unity
+    guid: 51b19169aec224c4aa0a4368a73f3378
+  - enabled: 1
+    path: Assets/Scenes/ooba/OobaResult.unity
+    guid: ea8cfde8ebe06874ebe4128681560e6c
   m_configObjects: {}
