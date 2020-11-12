@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Eat
+  - damage
   layers:
   - Default
   - TransparentFX
