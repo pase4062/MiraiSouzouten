@@ -16,11 +16,13 @@ public class GetClickedGameObject : MonoBehaviour
     
             clickedGameObject = null;
             activeobjcontroller = null;
-    
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
-    
-            if (hit2d.collider)
+
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 10;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            RaycastHit2D hit2d = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit2d)
             {
                 clickedGameObject = hit2d.transform.gameObject;
     
@@ -30,6 +32,9 @@ public class GetClickedGameObject : MonoBehaviour
             }
             Debug.Log(hit2d);
             Debug.Log(clickedGameObject);
+            Debug.DrawLine(mousePos,
+        mousePos + new Vector3(0.1f,0.0f,0.0f), Color.blue);
+
         }
     }
 
