@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Eat
+  - damage
+  - SwitchOn
+  - SwitchOff
+  - tree
   layers:
   - Default
   - TransparentFX
