@@ -21,6 +21,6 @@ public class TitleController : MonoBehaviour
 
     public void PlayGame()
     {
-        FadeManager.Instance.LoadScene("PrototypeStage1", 2.0f);
+        FadeManager.Instance.LoadScene("Stage1_1", 2.0f);
     }
 }

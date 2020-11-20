@@ -14,7 +14,14 @@ public class SpiderController : MonoBehaviour
     Vector3 redirection = new Vector3(7f, 0.9f, 0f);      // デフォルト位置
     Vector3 direction = new Vector3(7f, -2.5f, 0f);      // デフォルト位置
 
-    float speed = 1.5f;
+    [SerializeField]
+    private float Downspeed = 1.5f;
+    [SerializeField]
+    private float Upspeed = 1.5f;
+
+    [SerializeField]
+    private GameObject BugApple;
+    BugAppleController bugapplecontroller;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +29,8 @@ public class SpiderController : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         disturbflug = false;
         move = true;
+
+        bugapplecontroller = BugApple.GetComponent<BugAppleController>();
     }
 
     // Update is called once per frame
@@ -31,17 +40,26 @@ public class SpiderController : MonoBehaviour
         {
             if(move)
             {
-                float step = speed * Time.deltaTime;
+                float step = Downspeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, direction, step);
 
                 if (transform.position == direction)
                 {
                     move = false;
+                    // 虫食いリンゴが右にあればゴールフラグが経つ
+                    if (!bugapplecontroller.GetApple())
+                    {
+                        disturbflug = false;
+                        //DelayMethodを3秒後に呼び出す
+                        Invoke("NextScene", 3.0f);
+                        
+                    }
+
                 }
             }
             else
             {
-                float step = speed * Time.deltaTime;
+                float step = Upspeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, redirection, step);
 
                 if (transform.position == redirection)
@@ -60,5 +78,11 @@ public class SpiderController : MonoBehaviour
 
         disturbflug = true;
         Debug.Log("spider");
+    }
+
+    private void NextScene()
+    {
+        FadeManager.Instance.LoadScene("Stage2_2", 2.0f);
+        Debug.Log("Stage2Go");
     }
 }
