@@ -9,6 +9,9 @@ public class MyMouseManager : MonoBehaviour
 
     public GameObject[] playerIcons;
 
+    public GameObject OnObject;
+    public GameObject OffObject;
+
     public int destroyCount = 0;
 
     void Update()
@@ -27,13 +30,24 @@ public class MyMouseManager : MonoBehaviour
             {
                 clickedGameObject = hit2d.transform.gameObject;
 
+                // ダメージタグチェック
                 if (clickedGameObject.gameObject.CompareTag("damage"))
                 {
                     destroyCount += 1;
                     UpdatePlayerIcons();
                 }
 
-                
+                // 切り替えオブジェクトチェック
+                if(clickedGameObject.gameObject.CompareTag("SwitchOff"))
+                {
+                    OffObject.SetActive(false);
+                    OnObject.SetActive(true);
+                }
+                else if (clickedGameObject.gameObject.CompareTag("SwitchOn"))
+                {
+                    OffObject.SetActive(true);
+                    OnObject.SetActive(false);
+                }
 
                 // クリックしたオブジェクトのイベント確認
                 //objcontroller = clickedGameObject.GetComponent<MyObjController>();
@@ -46,7 +60,7 @@ public class MyMouseManager : MonoBehaviour
 
     void UpdatePlayerIcons()
     {
-        // for文（繰り返し文）・・・まずは基本形を覚えましょう！
+        
         for (int i = 0; i < playerIcons.Length; i++)
         {
             if (destroyCount <= i)
