@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4916070763755738029}
   - component: {fileID: 4916070763755738028}
   - component: {fileID: 4916070763755738031}
+  - component: {fileID: 8155387462200254569}
   m_Layer: 0
   m_Name: leaf
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip:
-  - {fileID: 8300000, guid: 1b32dd9158abd4c45b203d87e95aca0e, type: 3}
+  - {fileID: 8300000, guid: 34721aefe19276947a6f23e5cd3b7efc, type: 3}
   Actflag: 0
   NextObj: {fileID: 0}
   apple: {fileID: 0}
@@ -108,9 +109,38 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 3, y: 2}
   m_Direction: 1
+--- !u!114 &8155387462200254569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916070763755738019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4916070763755738028}
+          m_MethodName: GetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  delegates: []

@@ -51,6 +51,8 @@ public class ActiveObjController : MonoBehaviour
 
     public void GetActive()
     {
+        audioSource.PlayOneShot(audioClip[0]);
+
         // フラグが立っていればギミックが動く(リンゴが落ちるなどの)
         if (Actflag)
         {
@@ -62,7 +64,7 @@ public class ActiveObjController : MonoBehaviour
                 appleController.DownAct();
             }
 
-
+            
 
             // 次に反応するオブジェクトのフラグを立てる
             NextController.ActflagOn();
@@ -77,7 +79,7 @@ public class ActiveObjController : MonoBehaviour
         else
         {
             // 反応なしSE再生
-            audioSource.PlayOneShot(audioClip[0]);
+            //audioSource.PlayOneShot(audioClip[0]);
         }
     }
 }

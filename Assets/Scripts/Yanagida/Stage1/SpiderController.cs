@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SpiderController : MonoBehaviour
 {
+    // オーディオ変数
+    AudioSource audioSource;
+    [SerializeField]
+    private List<AudioClip> audioClip = new List<AudioClip>();
 
     private bool disturbflug;       // お邪魔フラグ
     private bool move;       // お邪魔フラグ
@@ -15,6 +19,7 @@ public class SpiderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
         disturbflug = false;
         move = true;
     }
@@ -51,7 +56,9 @@ public class SpiderController : MonoBehaviour
 
     public void Disturb()
     {
+        audioSource.PlayOneShot(audioClip[0]);
+
         disturbflug = true;
-        Debug.Log("aa");
+        Debug.Log("spider");
     }
 }

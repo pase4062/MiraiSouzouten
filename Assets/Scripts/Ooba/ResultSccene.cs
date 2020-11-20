@@ -16,7 +16,7 @@ public class ResultSccene : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            SceneManager.LoadScene("OobaTitle");
+            SceneManager.LoadScene("OobaGame");
         };
     }
 }
