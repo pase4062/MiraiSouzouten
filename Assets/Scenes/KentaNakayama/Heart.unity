@@ -145,6 +145,8 @@ MonoBehaviour:
   - {fileID: 2129052963}
   - {fileID: 1853104274}
   - {fileID: 971070195}
+  OnObject: {fileID: 0}
+  OffObject: {fileID: 0}
   destroyCount: 0
 --- !u!4 &49771905
 Transform:
@@ -197,7 +199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -386.5, y: 227.5}
+  m_AnchoredPosition: {x: -251, y: 155}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &350016487
@@ -789,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
