@@ -7,6 +7,10 @@ public class BugAppleController : MonoBehaviour
     private bool movef;            // 移動フラグ
     private bool moveright;       // 移動方向判定
     private Rigidbody2D rb;       // 重力変数
+
+    // プレイヤー情報
+    private GameObject Player;
+    private PlayerController playerconroller;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +19,9 @@ public class BugAppleController : MonoBehaviour
 
         //Rigidbodyを取得
         rb = GetComponent<Rigidbody2D>();
+
+        Player = GameObject.Find("MotionPlayer");
+        playerconroller = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -36,8 +43,17 @@ public class BugAppleController : MonoBehaviour
         }
     }
 
-    public void Move()
+    public void MoveAct()
     {
+        // コルーチン呼び出し
+        StartCoroutine("Move");
+    }
+
+    IEnumerator Move()
+    {
+        //～秒停止(プレイヤーが移動してるか否かによって変わる)
+        yield return new WaitForSeconds(playerconroller.GetMove());
+
         if (!movef)
         {
             movef = true;

@@ -51,7 +51,7 @@ public class SpiderController : MonoBehaviour
                     {
                         disturbflug = false;
                         //DelayMethodを3秒後に呼び出す
-                        Invoke("NextScene", 3.0f);
+                        Invoke("NextScene", 1.0f);
                         
                     }
 

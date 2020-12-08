@@ -13,10 +13,17 @@ public class GoalObject : MonoBehaviour
     private GameObject Spider;                     // 蜘蛛オブジェクト
     private SpiderController spidercontroller;     // 蜘蛛スクリプト
 
+    private GameObject Player;
+    private PlayerController playerconroller;
+
+    [SerializeField]
+    private Vector3 MovePos;
     // Start is called before the first frame update
     void Start()
     {
         //goalflag = false;
+        Player = GameObject.Find("MotionPlayer");
+        playerconroller = Player.GetComponent<PlayerController>();
 
         if (Spider)
             spidercontroller = Spider.GetComponent<SpiderController>();
@@ -32,12 +39,15 @@ public class GoalObject : MonoBehaviour
     {
         if (goalflag)    // ゴール可能か
         {
+            
             // 次のシーンへ飛ぶかステージクリア演出の表示
             Debug.Log("くりあ！！");
             NextScene();
         }
         else // ステージごとにゴール阻害するものが変わるため書き直しそう(ステージ1では蜘蛛が邪魔してくる)
         {
+            // プレイヤーの目的地を設定
+            playerconroller.SetMove(MovePos);
             spidercontroller.Disturb();
         }
     }

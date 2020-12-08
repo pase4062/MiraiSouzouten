@@ -11,29 +11,26 @@ public class ActiveObjController : MonoBehaviour
 
     
     [SerializeField]
-    private bool Actflag;   // ゲーム進行フラグ
-    private bool goalflag;  // ゴール判定フラグ
     private bool eatflag;   // 捕食フラグ
 
-    [SerializeField]
-    private GameObject NextObj;                     // 次に動かすオブジェクト
-    private ActiveObjController NextController;     // 次に動かすオブジェクトスクリプト
+    //[SerializeField]
+    //private GameObject MyObj;
+
+    // プレイヤー情報
+    private GameObject Player;
+    private PlayerController playerconroller;
 
     [SerializeField]
-    GameObject apple;
-    private AppleController appleController;     // 次に動かすオブジェクトスクリプト
+    private Vector3 MovePos;
 
-    private GoalObject goalObj;
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //MyObj = this.gameObject;
 
-        if(NextObj)
-            NextController = NextObj.GetComponent<ActiveObjController>();
-        
-        if(apple)
-            appleController = apple.GetComponent<AppleController>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        Player = GameObject.Find("MotionPlayer");
+        playerconroller = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -42,44 +39,30 @@ public class ActiveObjController : MonoBehaviour
         
     }
 
-    
 
-    public void ActflagOn()
-    {
-        Actflag = true;
-    }
 
     public void GetActive()
     {
-        audioSource.PlayOneShot(audioClip[0]);
+        // プレイヤーの目的地を設定
+        playerconroller.SetMove(MovePos);
+        //playerconroller.SetMove(MovePos, MyObj);
 
-        // フラグが立っていればギミックが動く(リンゴが落ちるなどの)
-        if (Actflag)
+        // コルーチン呼び出し
+        StartCoroutine("LateActive");
+
+
+
+    }
+
+    IEnumerator LateActive()    // プレイヤー移動後に実行
+    {
+        //～秒停止(プレイヤーが移動してるか否かによって変わる)
+        yield return new WaitForSeconds(playerconroller.GetMove());
+
+        // プレイヤーが目的地に着いたら効果音再生
+        if (audioClip[0] != null)
         {
-
-            // 一回のみ反応
-            Actflag = false;
-            if (apple)
-            {
-                appleController.DownAct();
-            }
-
-            
-
-            // 次に反応するオブジェクトのフラグを立てる
-            NextController.ActflagOn();
-        }
-        else if(this.gameObject.tag == "Finish")
-        {
-            goalObj = this.GetComponent<GoalObject>();
-
-            goalObj.GetActive();    // ゴールオブジェクト関数
-            
-        }
-        else
-        {
-            // 反応なしSE再生
-            //audioSource.PlayOneShot(audioClip[0]);
+            audioSource.PlayOneShot(audioClip[0]);
         }
     }
 }
