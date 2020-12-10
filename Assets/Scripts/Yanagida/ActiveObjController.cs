@@ -13,8 +13,9 @@ public class ActiveObjController : MonoBehaviour
     [SerializeField]
     private bool eatflag;   // 捕食フラグ
 
-    //[SerializeField]
-    //private GameObject MyObj;
+    // マウス情報
+    private GameObject mousemanager;
+    private LockCursor lockcursor;
 
     // プレイヤー情報
     private GameObject Player;
@@ -31,6 +32,10 @@ public class ActiveObjController : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         Player = GameObject.Find("MotionPlayer");
         playerconroller = Player.GetComponent<PlayerController>();
+        mousemanager = GameObject.Find("MouseManager");
+        lockcursor = mousemanager.GetComponent<LockCursor>();
+
+
     }
 
     // Update is called once per frame
@@ -43,6 +48,9 @@ public class ActiveObjController : MonoBehaviour
 
     public void GetActive()
     {
+        // クリック入力を一時停止
+        lockcursor.ClickOff();
+
         // プレイヤーの目的地を設定
         playerconroller.SetMove(MovePos);
         //playerconroller.SetMove(MovePos, MyObj);
@@ -63,6 +71,11 @@ public class ActiveObjController : MonoBehaviour
         if (audioClip[0] != null)
         {
             audioSource.PlayOneShot(audioClip[0]);
+
+            
         }
+
+        // クリック入力可能にする
+        lockcursor.ClickOn();
     }
 }
