@@ -16,17 +16,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
     private bool movef;
-    private Vector3 direction;
     private Vector2 scale;
 
+    // 初期位置
+    private Vector2 sposition;
+
     //private GameObject ActObj;      // 移動後にアクティブにするオブジェクト
-   
+    private GameObject LifeUI;
+    private UIManager uimanager;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         movef = false;
         scale = transform.localScale;
+
+        sposition = transform.position;
+
+        LifeUI = GameObject.Find("UIManager");
+        uimanager = LifeUI.GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -108,5 +117,13 @@ public class PlayerController : MonoBehaviour
             return 1;
         else
             return 0;
+    }
+
+    public void Respown()
+    {
+        // ライフが1減り初期地へ
+        uimanager.Damage();
+
+        transform.position = sposition;
     }
 }

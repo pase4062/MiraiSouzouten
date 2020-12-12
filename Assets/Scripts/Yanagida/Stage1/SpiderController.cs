@@ -23,6 +23,10 @@ public class SpiderController : MonoBehaviour
     private GameObject BugApple;
     BugAppleController bugapplecontroller;
 
+    [SerializeField]
+    private GameObject cocoonobj;
+    Cocoon cocoon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,7 @@ public class SpiderController : MonoBehaviour
         move = true;
 
         bugapplecontroller = BugApple.GetComponent<BugAppleController>();
+        cocoon = cocoonobj.GetComponent<Cocoon>();
     }
 
     // Update is called once per frame
@@ -53,6 +58,10 @@ public class SpiderController : MonoBehaviour
                         //DelayMethodを3秒後に呼び出す
                         Invoke("NextScene", 1.0f);
                         
+                    }
+                    else// 無ければプレイヤーが眉にまかれる
+                    {
+                        cocoonobj.SetActive(true);
                     }
 
                 }

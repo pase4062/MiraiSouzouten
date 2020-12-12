@@ -11,6 +11,10 @@ public class BugAppleController : MonoBehaviour
     // プレイヤー情報
     private GameObject Player;
     private PlayerController playerconroller;
+
+    [SerializeField]
+    private GameObject Goal;
+    private GoalObject Goalconroller;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,8 @@ public class BugAppleController : MonoBehaviour
 
         Player = GameObject.Find("MotionPlayer");
         playerconroller = Player.GetComponent<PlayerController>();
+
+        Goalconroller = Goal.GetComponent<GoalObject>();
     }
 
     // Update is called once per frame
@@ -57,6 +63,8 @@ public class BugAppleController : MonoBehaviour
         if (!movef)
         {
             movef = true;
+            Goalconroller.FlagChange(); // ゴールフラグ切り替え
+
             if (moveright)
             {
                 Vector2 force = new Vector2(3.0f, 0.0f);  // 力を設定

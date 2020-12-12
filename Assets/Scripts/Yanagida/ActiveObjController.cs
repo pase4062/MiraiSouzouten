@@ -24,6 +24,10 @@ public class ActiveObjController : MonoBehaviour
     [SerializeField]
     private Vector3 MovePos;
 
+    [SerializeField]
+    private GameObject oncursortex;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +38,6 @@ public class ActiveObjController : MonoBehaviour
         playerconroller = Player.GetComponent<PlayerController>();
         mousemanager = GameObject.Find("MouseManager");
         lockcursor = mousemanager.GetComponent<LockCursor>();
-
 
     }
 
@@ -57,9 +60,6 @@ public class ActiveObjController : MonoBehaviour
 
         // コルーチン呼び出し
         StartCoroutine("LateActive");
-
-
-
     }
 
     IEnumerator LateActive()    // プレイヤー移動後に実行
@@ -71,11 +71,19 @@ public class ActiveObjController : MonoBehaviour
         if (audioClip[0] != null)
         {
             audioSource.PlayOneShot(audioClip[0]);
-
-            
         }
 
         // クリック入力可能にする
         lockcursor.ClickOn();
+    }
+
+    public void OnCursor()
+    {
+        oncursortex.SetActive(true);
+    }
+
+    public void OutCursor()
+    {
+        oncursortex.SetActive(false);
     }
 }

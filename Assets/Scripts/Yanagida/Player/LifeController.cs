@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class LifeController : MonoBehaviour
 {
     public GameObject[] playerIcons;
 
-    public int destroyCount = 0;
-
+    private int destroyCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,16 +16,10 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerIcons();
+        
     }
 
-    public void Damage()
-    {
-        destroyCount += 1;
-        UpdatePlayerIcons();
-    }
-
-    void UpdatePlayerIcons()
+    private void UpdatePlayerIcons()
     {
 
         for (int i = 0; i < playerIcons.Length; i++)
@@ -40,5 +33,11 @@ public class UIManager : MonoBehaviour
                 playerIcons[i].SetActive(false);
             }
         }
+    }
+
+    public void Damage()
+    {
+        destroyCount += 1;
+        UpdatePlayerIcons();
     }
 }

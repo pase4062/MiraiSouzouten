@@ -18,6 +18,16 @@ public class GoalObject : MonoBehaviour
 
     [SerializeField]
     private Vector3 MovePos;
+
+    [SerializeField]
+    private Vector3 BadPos;
+
+    // マウス情報
+    private GameObject mousemanager;
+    private LockCursor lockcursor;
+
+    [SerializeField]
+    private GameObject oncursortex;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +37,9 @@ public class GoalObject : MonoBehaviour
 
         if (Spider)
             spidercontroller = Spider.GetComponent<SpiderController>();
+
+        mousemanager = GameObject.Find("MouseManager");
+        lockcursor = mousemanager.GetComponent<LockCursor>();
     }
 
     // Update is called once per frame
@@ -39,26 +52,37 @@ public class GoalObject : MonoBehaviour
     {
         if (goalflag)    // ゴール可能か
         {
+            // プレイヤーの目的地を設定
+            playerconroller.SetMove(MovePos);
+            spidercontroller.Disturb();
             
-            // 次のシーンへ飛ぶかステージクリア演出の表示
-            Debug.Log("くりあ！！");
-            NextScene();
         }
         else // ステージごとにゴール阻害するものが変わるため書き直しそう(ステージ1では蜘蛛が邪魔してくる)
         {
             // プレイヤーの目的地を設定
-            playerconroller.SetMove(MovePos);
+            playerconroller.SetMove(BadPos);
             spidercontroller.Disturb();
         }
     }
 
-    public void GoalTrue()
-    {
-        goalflag = true;
-    }
-
+   
     void NextScene()
     {
         SceneManager.LoadScene("Stage2");         // シーン遷移
+    }
+
+    public void FlagChange()
+    {
+        goalflag = !goalflag;
+    }
+
+    public void OnCursor()
+    {
+        oncursortex.SetActive(true);
+    }
+
+    public void OutCursor()
+    {
+        oncursortex.SetActive(false);
     }
 }
