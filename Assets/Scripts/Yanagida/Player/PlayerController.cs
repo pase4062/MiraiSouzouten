@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private GameObject LifeUI;
     private UIManager uimanager;
 
+    private bool evomode;
+    [SerializeField]
+    private float interval = 1.0f;	// 点滅周期
+    private float nextTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
         LifeUI = GameObject.Find("UIManager");
         uimanager = LifeUI.GetComponent<UIManager>();
+
+        evomode = false;
+        nextTime = Time.time;
     }
 
     // Update is called once per frame
@@ -74,9 +81,24 @@ public class PlayerController : MonoBehaviour
             //
             //    // ここから行動関数？
             //}
+
+        
         }
 
+        if(evomode)
+        {
+            if (Time.time > nextTime)
+            {
+                //renderer.enabled = !renderer.enabled;
+            
+                nextTime += interval;
+            }
 
+            // 一定フレームで進化し第二形態へ
+            evomode = false;
+            anim.speed = 1;
+            //anim.SetTrigger("Move to Wait");
+        }
 
     }
 
@@ -125,5 +147,11 @@ public class PlayerController : MonoBehaviour
         uimanager.Damage();
 
         transform.position = sposition;
+    }
+
+    public void Evolve()
+    {
+        anim.speed = 0;
+        evomode = true;
     }
 }
