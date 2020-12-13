@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour
     private GameObject LifeUI;
     private UIManager uimanager;
 
+    [SerializeField]
+    private int evoNum;
     private bool evomode;
     [SerializeField]
-    private float interval = 1.0f;	// 点滅周期
+    private float interval;	// 点滅周期
     private float nextTime;
+    private int lookplayerCnt = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,8 +61,10 @@ public class PlayerController : MonoBehaviour
                 transform.position = endposition;
                 movef = false;
 
-                anim.SetTrigger("Move to Wait");
-                
+                if(evoNum == 1)
+                    anim.SetTrigger("Move to Wait");
+
+
                 scale.x = 0.5f;
                 transform.localScale = scale;
             }
@@ -92,12 +97,28 @@ public class PlayerController : MonoBehaviour
                 //renderer.enabled = !renderer.enabled;
             
                 nextTime += interval;
+                lookplayerCnt++;
+
+                if(lookplayerCnt % 2 == 0)
+                {
+                    anim.SetTrigger("Wait to wait2");
+                }
+                else
+                {
+                    anim.SetTrigger("wait2 to Wait");
+                }
             }
 
             // 一定フレームで進化し第二形態へ
-            evomode = false;
-            anim.speed = 1;
-            //anim.SetTrigger("Move to Wait");
+            if(lookplayerCnt == 30)
+            {
+                evoNum = 2;
+                evomode = false;
+                anim.speed = 1;
+                anim.SetTrigger("Wait to wait2");
+                lookplayerCnt = 0;
+            }
+            
         }
 
     }
@@ -125,7 +146,9 @@ public class PlayerController : MonoBehaviour
             }
 
             // 移動モードに
-            anim.SetTrigger("Wait to Move");
+            if(evoNum == 1)
+                anim.SetTrigger("Wait to Move");
+
             movef = true;
 
             startTime = Time.timeSinceLevelLoad;
@@ -151,7 +174,12 @@ public class PlayerController : MonoBehaviour
 
     public void Evolve()
     {
-        anim.speed = 0;
-        evomode = true;
+        if (evoNum == 1)
+        {
+            anim.speed = 1;
+            anim.SetTrigger("Wait to wait2");
+            evomode = true;
+        }
+            
     }
 }
