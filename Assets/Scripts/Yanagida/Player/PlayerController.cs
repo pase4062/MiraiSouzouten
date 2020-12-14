@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
             anim.speed = 1;
             anim.SetTrigger("Wait to wait2");
             evomode = true;
+            Debug.Log("aaaa");
         }
             
     }
