@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // オーディオ変数
+    AudioSource audioSource;
+    [SerializeField]
+    private List<AudioClip> audioClip = new List<AudioClip>();
+
     private Animator anim;
 
     // 移動用変数
@@ -23,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     //private GameObject ActObj;      // 移動後にアクティブにするオブジェクト
     private GameObject LifeUI;
-    private UIManager uimanager;
+    private LifeController uimanager;
 
     [SerializeField]
     private int evoNum;
@@ -35,6 +40,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         anim = GetComponent<Animator>();
         movef = false;
         scale = transform.localScale;
@@ -42,7 +49,7 @@ public class PlayerController : MonoBehaviour
         sposition = transform.position;
 
         LifeUI = GameObject.Find("UIManager");
-        uimanager = LifeUI.GetComponent<UIManager>();
+        uimanager = LifeUI.GetComponent<LifeController>();
 
         evomode = false;
         nextTime = Time.time;
@@ -169,7 +176,23 @@ public class PlayerController : MonoBehaviour
         // ライフが1減り初期地へ
         uimanager.Damage();
 
+        if (audioClip[0] != null)   // ダメージ音
+        {
+            audioSource.PlayOneShot(audioClip[0]);
+        }
+
         transform.position = sposition;
+    }
+
+    public void Damage()
+    {
+        // ライフが1減り初期地へ
+        uimanager.Damage();
+
+        if (audioClip[0] != null)   // ダメージ音
+        {
+            audioSource.PlayOneShot(audioClip[0]);
+        }
     }
 
     public void Evolve()

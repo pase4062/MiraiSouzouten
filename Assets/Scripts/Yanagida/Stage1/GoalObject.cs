@@ -68,7 +68,7 @@ public class GoalObject : MonoBehaviour
    
     void NextScene()
     {
-        SceneManager.LoadScene("Stage2");         // シーン遷移
+        SceneManager.LoadScene("Stage2_1");         // シーン遷移
     }
 
     public void FlagChange()

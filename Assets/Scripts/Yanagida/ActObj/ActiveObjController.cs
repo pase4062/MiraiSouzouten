@@ -86,4 +86,32 @@ public class ActiveObjController : MonoBehaviour
     {
         oncursortex.SetActive(false);
     }
+
+    public void Damage()
+    {
+        // クリック入力を一時停止
+        //lockcursor.ClickOff();
+
+        
+
+        // コルーチン呼び出し
+        StartCoroutine("LateDamage");
+    }
+
+    IEnumerator LateDamage()    // プレイヤー移動後に実行
+    {
+        //～秒停止(プレイヤーが移動してるか否かによって変わる)
+        yield return new WaitForSeconds(playerconroller.GetMove());
+
+        // プレイヤーが目的地に着いたら効果音再生
+        if (audioClip[1] != null)
+        {
+            audioSource.PlayOneShot(audioClip[1]);
+        }
+
+        playerconroller.Damage();
+
+        // クリック入力可能にする
+        //lockcursor.ClickOn();
+    }
 }

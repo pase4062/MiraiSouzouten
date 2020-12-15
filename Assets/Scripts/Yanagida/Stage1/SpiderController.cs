@@ -61,6 +61,10 @@ public class SpiderController : MonoBehaviour
                     }
                     else// 無ければプレイヤーが眉にまかれる
                     {
+                        if (audioClip[1] != null)
+                        {
+                            audioSource.PlayOneShot(audioClip[1]);
+                        }
                         cocoonobj.SetActive(true);
                     }
 
@@ -83,7 +87,10 @@ public class SpiderController : MonoBehaviour
 
     public void Disturb()
     {
-        audioSource.PlayOneShot(audioClip[0]);
+        if (audioClip[0] != null)
+        {
+            audioSource.PlayOneShot(audioClip[0]);
+        }
 
         disturbflug = true;
         Debug.Log("spider");
@@ -91,7 +98,7 @@ public class SpiderController : MonoBehaviour
 
     private void NextScene()
     {
-        FadeManager.Instance.LoadScene("Stage2_2", 2.0f);
+        FadeManager.Instance.LoadScene("Stage2_1", 2.0f);
         Debug.Log("Stage2Go");
     }
 }

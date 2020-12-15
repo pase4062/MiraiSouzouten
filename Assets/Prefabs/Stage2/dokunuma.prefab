@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip:
   - {fileID: 8300000, guid: 1b32dd9158abd4c45b203d87e95aca0e, type: 3}
+  - {fileID: 8300000, guid: 4c79b2aa4a2d81247bfdf572a39bbfa9, type: 3}
   eatflag: 0
   MovePos: {x: 0, y: 0, z: 0}
   oncursortex: {fileID: 1434759107621887596}
@@ -228,6 +229,17 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1434759108418957004}
           m_MethodName: GetActive
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1434759108418957004}
+          m_MethodName: Damage
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

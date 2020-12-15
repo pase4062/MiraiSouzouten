@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 0.05
+  destroyCount: 0
 --- !u!1 &2499395198670034308
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2499395198670034315}
-  - component: {fileID: 2499395198670034314}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -125,22 +125,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2499395198670034314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2499395198670034308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc446903e50068142b59018b5398a055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &2499395198771504533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d840e560d69272d458ee8cad21808c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip:
+  - {fileID: 8300000, guid: 4c79b2aa4a2d81247bfdf572a39bbfa9, type: 3}
   time: 1
   speed: 5
+  evoNum: 0
+  interval: 0
 --- !u!1001 &2499395199104788128
 PrefabInstance:
   m_ObjectHideFlags: 0
